@@ -1,0 +1,14 @@
+---
+# tasks file for lb_role
+- name: "Installing the haproxy software into loadbalancer"
+  package:
+          name: "haproxy"
+          state: present
+- name: "Copying the haproxy.cfg jinga file to the lb"
+  template:
+          dest: "/etc/haproxy/haproxy.cfg"
+          src: "templates/haproxy.cfg"
+- name: "restarting the lb"
+  service:
+          name: "haproxy"
+          state: restarted
